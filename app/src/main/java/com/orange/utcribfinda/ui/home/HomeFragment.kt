@@ -1,4 +1,4 @@
-package com.example.utcribfinda.ui.saved
+package com.orange.utcribfinda.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.utcribfinda.databinding.FragmentHomeBinding
+import com.orange.utcribfinda.databinding.FragmentHomeBinding
 
-class SavedFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -22,14 +22,14 @@ class SavedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val savedViewModel =
-            ViewModelProvider(this)[SavedViewModel::class.java]
+        val homeViewModel =
+            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
-        savedViewModel.text.observe(viewLifecycleOwner) {
+        homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

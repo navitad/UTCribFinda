@@ -1,4 +1,4 @@
-package com.example.utcribfinda
+package com.orange.utcribfinda
 
 import org.junit.Test
 
