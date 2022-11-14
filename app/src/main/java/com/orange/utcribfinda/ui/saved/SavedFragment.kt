@@ -8,10 +8,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.orange.utcribfinda.databinding.FragmentHomeBinding
+import com.orange.utcribfinda.databinding.FragmentSavedBinding
 
 class SavedFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentSavedBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,10 +26,10 @@ class SavedFragment : Fragment() {
         val savedViewModel =
             ViewModelProvider(this)[SavedViewModel::class.java]
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentSavedBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
+        val textView: TextView = binding.textSaved
         savedViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
