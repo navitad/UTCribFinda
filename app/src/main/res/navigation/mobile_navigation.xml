@@ -13,6 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_saved"
+        android:name="com.example.utcribfinda.ui.saved.SavedFragment"
         android:label="@string/title_saved"
         tools:layout="@layout/fragment_saved" />
 
