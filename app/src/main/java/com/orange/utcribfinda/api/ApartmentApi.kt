@@ -4,7 +4,7 @@ import android.text.SpannableString
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
-import edu.cs371m.reddit.api.ListingPost
+import com.orange.utcribfinda.api.ListingPost
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,28 +15,33 @@ import retrofit2.http.Query
 import java.lang.reflect.Type
 
 interface ApartmentApi {
-    @GET("https://wrapapi.com/use/navita/apartments/villasOnRioListings/0.0.1?wrapAPIKey=MVBCXaViCKCM9UnqmwuUo3d0R9fTftzN")
+    //https://wrapapi.com
+    @GET("/use/navita/apartments/villasOnRioListings/0.0.1?wrapAPIKey=MVBCXaViCKCM9UnqmwuUo3d0R9fTftzN")
     suspend fun getVillasOnRioPosts() : ListingResponse
 
-    class ListingResponse(val data: ListingData)
+    data class ListingResponse(val output: List<ListingPost>)
 
-    class ListingData(
-        val children: List<ListingChildrenResponse>,
-        val after: String?,
-        val before: String?
-    )
-    data class ListingChildrenResponse(val data: ListingPost)
+    //data class ListingResponse(val output: List<ListingPost>)
 
-    class SpannableDeserializer : JsonDeserializer<SpannableString> {
-        // @Throws(JsonParseException::class)
-        override fun deserialize(
-            json: JsonElement,
-            typeOfT: Type,
-            context: JsonDeserializationContext
-        ): SpannableString {
-            return SpannableString(json.asString)
-        }
-    }
+//    class ListingResponse(val data: ListingData)
+
+//    class ListingData(
+//        val children: List<ListingChildrenResponse>,
+//        val after: String?,
+//        val before: String?
+//    )
+//    data class ListingChildrenResponse(val data: ListingPost)
+
+//    class SpannableDeserializer : JsonDeserializer<SpannableString> {
+//        // @Throws(JsonParseException::class)
+//        override fun deserialize(
+//            json: JsonElement,
+//            typeOfT: Type,
+//            context: JsonDeserializationContext
+//        ): SpannableString {
+//            return SpannableString(json.asString)
+//        }
+//    }
 
     companion object {
         // Leave this as a simple, base URL.  That way, we can have many different

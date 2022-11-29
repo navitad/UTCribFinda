@@ -1,4 +1,4 @@
-package edu.cs371m.reddit.api
+package com.orange.utcribfinda.api
 
 import android.graphics.Color
 import android.text.Spannable
@@ -9,31 +9,17 @@ import androidx.core.text.toSpannable
 import com.google.gson.annotations.SerializedName
 
 data class ListingPost (
-    @SerializedName("name")
-    val key: String,
-    @SerializedName("title")
-    val title: SpannableString,
-    @SerializedName("score")
-    val score: Int,
-    @SerializedName("author")
-    val author: String,
-    @SerializedName("num_comments")
-    val commentCount: Int,
-    @SerializedName("thumbnail")
-    val thumbnailURL: String,
-    @SerializedName("url")
-    val imageURL: String,
-    @SerializedName("selftext")
-    val selfText : SpannableString?,
-    @SerializedName("is_video")
-    val isVideo : Boolean,
-    // Useful for subreddits
-    @SerializedName("display_name")
-    val displayName: SpannableString?,
-    @SerializedName("icon_img")
-    val iconURL: String,
-    @SerializedName("public_description")
-    val publicDescription: SpannableString?
+    @SerializedName("floorPlanName")
+    val floorPlanName: String,
+    @SerializedName("bedBath")
+    val bedBath: String,
+    @SerializedName("price")
+    val price: String,
+    @SerializedName("sqFt")
+    val sqFt: String,
+    @SerializedName("availability")
+    val availability: String,
+
 ) {
     companion object {
         // NB: This only highlights the first match in a string
@@ -72,47 +58,47 @@ data class ListingPost (
     // a span that does nothing
     private fun removeAllCurrentSpans(){
         // Erase all spans
-        clearSpan(title)
-        clearSpan(selfText)
-        clearSpan(displayName)
-        clearSpan(publicDescription)
+//        clearSpan(title)
+//        clearSpan(selfText)
+//        clearSpan(displayName)
+//        clearSpan(publicDescription)
     }
 
     // Given a search string, look for it in the RedditPost.  If found,
     // highlight it and return true, otherwise return false.
-    fun searchFor(searchTerm: String): Boolean {
-        // XXX Write me, search both regular posts and subreddit listings
-        val list = mutableListOf<SpannableString>()
-        list.add(title)
-        if(selfText != null) {
-            list.add(selfText)
-        }
-        if(displayName != null) {
-            list.add(displayName)
-        }
-        if(publicDescription != null) {
-            list.add(publicDescription)
-        }
-
-        var highlighted = false
-        for(i in list) {
-            highlighted = highlighted.or(findAndSetSpan(i, searchTerm))
-        }
-
-        if(searchTerm == "") {
-            removeAllCurrentSpans()
-        }
-
-        return highlighted
-
-    }
+//    fun searchFor(searchTerm: String): Boolean {
+//        // XXX Write me, search both regular posts and subreddit listings
+//        val list = mutableListOf<SpannableString>()
+//        list.add(title)
+//        if(selfText != null) {
+//            list.add(selfText)
+//        }
+//        if(displayName != null) {
+//            list.add(displayName)
+//        }
+//        if(publicDescription != null) {
+//            list.add(publicDescription)
+//        }
+//
+//        var highlighted = false
+//        for(i in list) {
+//            highlighted = highlighted.or(findAndSetSpan(i, searchTerm))
+//        }
+//
+//        if(searchTerm == "") {
+//            removeAllCurrentSpans()
+//        }
+//
+//        return highlighted
+//
+//    }
 
     // NB: This changes the behavior of lists of RedditPosts.  I want posts fetched
     // at two different times to compare as equal.  By default, they will be different
     // objects with different hash codes.
     override fun equals(other: Any?) : Boolean =
         if (other is ListingPost) {
-            key == other.key
+            floorPlanName == other.floorPlanName
         } else {
             false
         }
