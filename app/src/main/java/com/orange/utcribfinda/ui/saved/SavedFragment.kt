@@ -25,7 +25,6 @@ class SavedFragment : Fragment() {
     ): View {
         val savedViewModel =
             ViewModelProvider(this)[SavedViewModel::class.java]
-
         _binding = FragmentSavedBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
