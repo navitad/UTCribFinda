@@ -19,29 +19,29 @@ interface ApartmentApi {
     @GET("/use/navita/apartments/villasOnRioListings/0.0.1?wrapAPIKey=MVBCXaViCKCM9UnqmwuUo3d0R9fTftzN")
     suspend fun getVillasOnRioPosts() : ListingResponse
 
-    data class ListingResponse(val output: List<ListingPost>)
+    data class ListingResponse(val output: List<List<ListingPost>>)
 
     //data class ListingResponse(val output: List<ListingPost>)
 
-//    class ListingResponse(val data: ListingData)
-
+//    class ListingResponse(val output: ListingData)
+//
 //    class ListingData(
 //        val children: List<ListingChildrenResponse>,
 //        val after: String?,
 //        val before: String?
 //    )
-//    data class ListingChildrenResponse(val data: ListingPost)
+//    data class ListingChildrenResponse(val output: ListingPost)
 
-//    class SpannableDeserializer : JsonDeserializer<SpannableString> {
-//        // @Throws(JsonParseException::class)
-//        override fun deserialize(
-//            json: JsonElement,
-//            typeOfT: Type,
-//            context: JsonDeserializationContext
-//        ): SpannableString {
-//            return SpannableString(json.asString)
-//        }
-//    }
+    class SpannableDeserializer : JsonDeserializer<SpannableString> {
+        // @Throws(JsonParseException::class)
+        override fun deserialize(
+            json: JsonElement,
+            typeOfT: Type,
+            context: JsonDeserializationContext
+        ): SpannableString {
+            return SpannableString(json.asString)
+        }
+    }
 
     companion object {
         // Leave this as a simple, base URL.  That way, we can have many different

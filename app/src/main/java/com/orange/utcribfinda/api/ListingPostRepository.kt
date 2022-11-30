@@ -4,6 +4,7 @@ import android.text.SpannableString
 import com.google.gson.GsonBuilder
 import com.orange.utcribfinda.MainActivity
 import com.orange.utcribfinda.api.ListingPost
+import kotlinx.coroutines.handleCoroutineException
 
 
 class ListingPostRepository(private val apartmentApi: ApartmentApi) {
@@ -15,9 +16,9 @@ class ListingPostRepository(private val apartmentApi: ApartmentApi) {
 //    private fun unpackPosts(response: ApartmentApi.ListingResponse): List<ListingPost> {
 //        // XXX Write me.
 //        val result = mutableListOf<ListingPost>()
-//        val children = response.data.children
+//        val children = response.output.children
 //        for(i in 0..children.size-1) {
-//            result.add(children[i].data)
+//            result.add(children[i].output)
 //        }
 //        return result
 //
@@ -25,17 +26,10 @@ class ListingPostRepository(private val apartmentApi: ApartmentApi) {
 
     //List<ListingPost>
     suspend fun getPosts(): List<ListingPost> {
-//        if (MainActivity.globalDebug) {
-//            val response = gson.fromJson(
-//                MainActivity.jsonAww100,
-//                ApartmentApi.ListingResponse::class.java)
-//            return unpackPosts(response)
-//        } else {
-            // XXX Write me.
-            val response = apartmentApi.getVillasOnRioPosts()
-            return response.output
-            //return unpackPosts(response)
-//        }
+        // XXX Write me.
+        val response = apartmentApi.getVillasOnRioPosts()
+        return response.output
+        //return unpackPosts(response)
     }
 
 //    suspend fun getSubreddits(): List<ListingPost> {
