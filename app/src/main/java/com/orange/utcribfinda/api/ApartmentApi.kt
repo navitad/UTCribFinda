@@ -1,6 +1,7 @@
 package com.orange.utcribfinda.api
 
 import android.text.SpannableString
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
@@ -19,18 +20,12 @@ interface ApartmentApi {
     @GET("/use/navita/apartments/villasOnRioListings/0.0.1?wrapAPIKey=MVBCXaViCKCM9UnqmwuUo3d0R9fTftzN")
     suspend fun getVillasOnRioPosts() : ListingResponse
 
-    data class ListingResponse(val output: List<List<ListingPost>>)
+    class ListingResponse(val data: ListingData)
 
-    //data class ListingResponse(val output: List<ListingPost>)
-
-//    class ListingResponse(val output: ListingData)
-//
-//    class ListingData(
-//        val children: List<ListingChildrenResponse>,
-//        val after: String?,
-//        val before: String?
-//    )
-//    data class ListingChildrenResponse(val output: ListingPost)
+    class ListingData(
+        val output: List<Responses>,
+    )
+    data class Responses(val data: ListingPost)
 
     class SpannableDeserializer : JsonDeserializer<SpannableString> {
         // @Throws(JsonParseException::class)
@@ -44,6 +39,13 @@ interface ApartmentApi {
     }
 
     companion object {
+
+        private fun buildGsonConverterFactory(): GsonConverterFactory {
+            val gsonBuilder = GsonBuilder().registerTypeAdapter(
+                SpannableString::class.java, SpannableDeserializer()
+            )
+            return GsonConverterFactory.create(gsonBuilder.create())
+        }
         // Leave this as a simple, base URL.  That way, we can have many different
         // functions (above) that access different "paths" on this server
         // https://square.github.io/okhttp/4.x/okhttp/okhttp3/-http-url/
@@ -64,7 +66,7 @@ interface ApartmentApi {
             return Retrofit.Builder()
                 .baseUrl(httpUrl)
                 .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(buildGsonConverterFactory())
                 .build()
                 .create(ApartmentApi::class.java)
         }

@@ -1,6 +1,7 @@
 package com.orange.utcribfinda.api
 
 import android.text.SpannableString
+import android.util.Log
 import com.google.gson.GsonBuilder
 import com.orange.utcribfinda.MainActivity
 import com.orange.utcribfinda.api.ListingPost
@@ -13,23 +14,23 @@ class ListingPostRepository(private val apartmentApi: ApartmentApi) {
 //        SpannableString::class.java, ApartmentApi.SpannableDeserializer()
 //    ).create()
 
-//    private fun unpackPosts(response: ApartmentApi.ListingResponse): List<ListingPost> {
-//        // XXX Write me.
-//        val result = mutableListOf<ListingPost>()
-//        val children = response.output.children
-//        for(i in 0..children.size-1) {
-//            result.add(children[i].output)
-//        }
-//        return result
-//
-//    }
+    private fun unpackPosts(response: ApartmentApi.ListingResponse): List<ListingPost> {
+        // XXX Write me.
+        val result = mutableListOf<ListingPost>()
+        val children = response.data.output
+        for(element in children) {
+            result.add(element)
+        }
+        return result
+
+    }
 
     //List<ListingPost>
-    suspend fun getPosts(): List<ListingPost> {
+    suspend fun getPosts(): ListingPost {
         // XXX Write me.
         val response = apartmentApi.getVillasOnRioPosts()
-        return response.output
-        //return unpackPosts(response)
+        Log.d("r", response.data.toString())
+        return response.data.output
     }
 
 //    suspend fun getSubreddits(): List<ListingPost> {
