@@ -19,18 +19,18 @@ class ListingPostRepository(private val apartmentApi: ApartmentApi) {
         val result = mutableListOf<ListingPost>()
         val children = response.data.output
         for(element in children) {
-            result.add(element)
+            result.add(element.data)
         }
         return result
 
     }
 
     //List<ListingPost>
-    suspend fun getPosts(): ListingPost {
+    suspend fun getPosts(): List<ListingPost> {
         // XXX Write me.
         val response = apartmentApi.getVillasOnRioPosts()
         Log.d("r", response.data.toString())
-        return response.data.output
+        return unpackPosts(response)
     }
 
 //    suspend fun getSubreddits(): List<ListingPost> {

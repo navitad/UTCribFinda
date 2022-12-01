@@ -23,7 +23,7 @@ interface ApartmentApi {
     class ListingResponse(val data: ListingData)
 
     class ListingData(
-        val output: List<Responses>,
+        val output: List<Responses>
     )
     data class Responses(val data: ListingPost)
 
