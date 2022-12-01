@@ -17,7 +17,7 @@ class SavedViewModel : ViewModel() {
     private var netPosts = MutableLiveData<List<ListingPost>>()
     private var favoritesList = mutableListOf<ListingPost>()
     var selectedPosts = mutableListOf<ListingPost>()
-
+    private var postsPicked = MutableLiveData<List<ListingPost>>()
 
 
 
@@ -31,6 +31,16 @@ class SavedViewModel : ViewModel() {
             netPosts.postValue(ListingPostRepository(api).getPosts())
         }
         return true
+    }
+
+    fun observePostsPicked(): MutableLiveData<List<ListingPost>> {
+        return postsPicked
+    }
+
+    fun fetchSelected() {
+        viewModelScope.launch(viewModelScope.coroutineContext + Dispatchers.IO) {
+            postsPicked.postValue(selectedPosts)
+        }
     }
 
     fun observeNetPosts() : MutableLiveData<List<ListingPost>> {

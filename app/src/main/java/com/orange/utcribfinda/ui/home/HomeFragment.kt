@@ -3,6 +3,7 @@ package com.orange.utcribfinda.ui.home
 
 import com.orange.utcribfinda.R
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,6 +75,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                     if(numRooms == i.numBeds && numBath == i.numBaths && minPrice <= i.price &&
                         maxPrice >= i.price && minSqFt <= i.sqFT!! && maxSqFt >= i.sqFT){
                         posts.add(i)
+                        //Log.d("in home", posts.toString())
                     }
                 }
             }
@@ -81,8 +83,13 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
             if(posts.isEmpty()){
                 Toast.makeText(activity, "Try again with different attributes.", Toast.LENGTH_LONG).show()
             } else {
-                viewModel.submitList(posts)
-                findNavController().navigate(
+                viewModel.selectedPosts = posts
+                viewModel.fetchSelected()
+//                Log.d("selec", viewModel.selectedPosts.toString())
+//                viewModel.observePostsPicked().observe(viewLifecycleOwner) {
+//                    Log.d("idk", it.toString())
+//                }
+                    findNavController().navigate(
                     R.id.action_navigation_home_to_navigation_results
                 )
             }

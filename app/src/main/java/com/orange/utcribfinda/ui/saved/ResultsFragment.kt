@@ -52,7 +52,10 @@ class ResultsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = initAdapter(binding)
-        adapter.submitList(viewModel.observeSelectedPosts())
+        viewModel.observePostsPicked().observe(viewLifecycleOwner) {
+            Log.d("in res" , it.toString())
+            adapter.submitList(it)
+        }
 
     }
 
