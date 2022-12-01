@@ -29,7 +29,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
     private val viewModel: SavedViewModel by activityViewModels()
     private var _viewModel: ViewModel? = null
     private var location: String = "West Campus"
-    private var numRooms: Int = 0
+    private var numRooms: Int = 1
     private var numBath: Int = 1
     private var minPrice: Int = 0
     private var maxPrice: Int = 2500
@@ -75,21 +75,22 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                         //Log.d("in home", posts.toString())
                     }
                 }
-            }
-
-            if(posts.isEmpty()){
-                Toast.makeText(activity, "Try again with different attributes.", Toast.LENGTH_LONG).show()
-            } else {
-                viewModel.selectedPosts = posts
-                viewModel.fetchSelected()
+                if(posts.isEmpty()){
+                    Toast.makeText(activity, "Try again with different attributes.", Toast.LENGTH_LONG).show()
+                } else {
+                    viewModel.selectedPosts = posts
+                    viewModel.fetchSelected()
 //                Log.d("selec", viewModel.selectedPosts.toString())
 //                viewModel.observePostsPicked().observe(viewLifecycleOwner) {
 //                    Log.d("idk", it.toString())
 //                }
                     findNavController().navigate(
-                    R.id.action_navigation_home_to_navigation_results
-                )
+                        R.id.action_navigation_home_to_navigation_results
+                    )
+                }
             }
+
+
 
         }
     }
@@ -124,7 +125,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
     }
 
     private fun setUpRooms(){
-        val data = arrayOf(0, 1, 2, 3, 4, 5)
+        val data = arrayOf(1, 2, 3, 4, 5)
         val aa = activity?.let {
             ArrayAdapter(
                 it,
@@ -142,7 +143,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
 //                    Toast.makeText(activity,
 //                        parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show()
-                    numRooms =  position
+                    numRooms =  position + 1
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
