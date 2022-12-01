@@ -45,6 +45,8 @@ class ResultsFragment : Fragment() {
 //        val savedViewModel =
 //            ViewModelProvider(this)[SavedViewModel::class.java]
         _binding = FragmentSavedBinding.inflate(inflater, container, false)
+
+
         return binding.root
     }
 

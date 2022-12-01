@@ -8,7 +8,7 @@ data class ListingPost(
     val floorPlanName: String,
 
     @SerializedName("numBeds")
-    val numBeds: Int? = 0,
+    val numBeds: Int? = 1,
 
     @SerializedName("numBaths")
     val numBaths: Int,
