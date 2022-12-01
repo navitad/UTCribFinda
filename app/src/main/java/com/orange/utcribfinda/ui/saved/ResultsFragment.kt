@@ -52,11 +52,7 @@ class ResultsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = initAdapter(binding)
-        viewModel.observeNetPosts().observe(viewLifecycleOwner) {
-            Log.d("sf" , it.toString())
-            adapter.submitList(it)
-        }
-
+        adapter.submitList(viewModel.observeSelectedPosts())
 
     }
 

@@ -8,14 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asFlow
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.orange.utcribfinda.MainActivity
+import com.orange.utcribfinda.api.ListingPost
 import com.orange.utcribfinda.databinding.FragmentHomeBinding
 import com.orange.utcribfinda.ui.saved.ResultsFragment
 import com.orange.utcribfinda.ui.saved.SavedFragment
@@ -24,8 +28,8 @@ import com.orange.utcribfinda.ui.saved.SavedViewModel
 class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentHomeBinding? = null
-    private val viewModel: HomeViewModel by viewModels()
-    //private var _viewModel: ViewModel? = null
+    private val viewModel: SavedViewModel by viewModels()
+    private var _viewModel: ViewModel? = null
     private var location: String = "West Campus"
     private var numRooms: Int = 0
     private var numBath: Int = 1
@@ -51,7 +55,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //_viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        //_viewModel = ViewModelProvider(this)[SavedViewModel::class.java]
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         setUpLocation()
         setUpRooms()
@@ -64,18 +68,25 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
 
     private fun submit(){
         binding.submit.setOnClickListener{
-            findNavController().navigate(
-                R.id.action_navigation_home_to_navigation_results
-            )
+            var posts = mutableListOf<ListingPost>()
+            viewModel.observeNetPosts().observe(viewLifecycleOwner) {
+                for(i in it){
+                    if(numRooms == i.numBeds && numBath == i.numBaths && minPrice <= i.price &&
+                        maxPrice >= i.price && minSqFt <= i.sqFT!! && maxSqFt >= i.sqFT){
+                        posts.add(i)
+                    }
+                }
+            }
 
+            if(posts.isEmpty()){
+                Toast.makeText(activity, "Try again with different attributes.", Toast.LENGTH_LONG).show()
+            } else {
+                viewModel.submitList(posts)
+                findNavController().navigate(
+                    R.id.action_navigation_home_to_navigation_results
+                )
+            }
 
-
-//            var manager = activity!!.supportFragmentManager
-//            manager.commit {
-//                add(ViewGroup.generateViewId(), ResultsFragment.newInstance(), "findThisFrag")
-//                    .addToBackStack(null)
-//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//            }
         }
     }
 

@@ -63,7 +63,7 @@ class SavedFragment : Fragment() {
                 adapter.submitList(it)
         }
 
-        findNavController().popBackStack()
+        //findNavController().popBackStack()
 
 
     }
