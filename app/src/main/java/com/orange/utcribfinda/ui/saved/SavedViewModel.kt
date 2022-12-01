@@ -14,8 +14,6 @@ class SavedViewModel : ViewModel() {
 
     var api = ApartmentApi.create()
 
-    //private var subredditList = mutableListOf<ListingPost>()
-    //private var netPosts = MutableLiveData<List<ListingPost>>()
     private var netPosts = MutableLiveData<List<ListingPost>>()
     private var favoritesList = mutableListOf<ListingPost>()
 
