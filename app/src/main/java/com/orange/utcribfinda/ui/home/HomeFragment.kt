@@ -64,7 +64,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
 
     private fun submit(){
         binding.submit.setOnClickListener{
-            Navigation.createNavigateOnClickListener(
+            findNavController().navigate(
                 R.id.action_navigation_home_to_navigation_results
             )
 

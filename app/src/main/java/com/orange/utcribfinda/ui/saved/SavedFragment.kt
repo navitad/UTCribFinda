@@ -3,6 +3,7 @@ package com.orange.utcribfinda.ui.saved
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -10,7 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.orange.utcribfinda.R
 import com.orange.utcribfinda.databinding.FragmentHomeBinding
 import com.orange.utcribfinda.databinding.FragmentRvBinding
 import com.orange.utcribfinda.databinding.FragmentSavedBinding
@@ -57,8 +63,12 @@ class SavedFragment : Fragment() {
                 adapter.submitList(it)
         }
 
+        findNavController().popBackStack()
+
 
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
