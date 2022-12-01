@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.orange.utcribfinda.databinding.FragmentHomeBinding
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -21,6 +19,10 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var location: String = "West Campus"
     private var numRooms: Int = 0
     private var numBath: Int = 1
+    private var minPrice: Int = 0
+    private var maxPrice: Int = 2500
+    private var minSqFt: Int = 0
+    private var maxSqFt : Int = 2000
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -37,6 +39,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         setUpLocation()
         setUpRooms()
         setUpBath()
+        setUpPrice()
+        setUpSize()
         return binding.root
     }
 
@@ -128,7 +132,31 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun setUpPrice(){
+        binding.price.setValues(
+            listOf(0f, 2500f),
+            0f,
+            2500f
+        )
+        binding.price.addOnValueChangeListener{ from, to, _ ->
+            val text = "$${from.toInt()}-$${to.toInt()} "
+            minPrice = from.toInt()
+            maxPrice = to.toInt()
+            binding.priceRange.text = text
+        }
+    }
 
+    private fun setUpSize(){
+        binding.sqft.setValues(
+            listOf(0f, 2000f),
+            0f,
+            2500f,
+        )
+        binding.sqft.addOnValueChangeListener{ from, to, _ ->
+            val text = "[${from.toInt()} ~ ${to.toInt()}] "
+            minSqFt = from.toInt()
+            maxSqFt = to.toInt()
+            binding.sqftRange.text = text
+        }
     }
 
     override fun onDestroyView() {

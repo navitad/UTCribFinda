@@ -115,10 +115,18 @@
                 android:id="@+id/price"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                />
 
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/priceRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="$0-$2500 "
+            android:gravity="right"
+            android:textStyle="bold" />
         <LinearLayout
             android:id="@+id/sizeOf"
             android:layout_width="match_parent"
@@ -139,9 +147,18 @@
                 android:id="@+id/sqft"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                />
 
         </LinearLayout>
+        <TextView
+            android:id="@+id/sqftRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="[0 ~ 2000] "
+            android:gravity="right"
+            android:textStyle="bold" />
 
 <!--        <LinearLayout-->
 <!--            android:id="@+id/ParkingLayout"-->

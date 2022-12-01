@@ -17,5 +17,7 @@ data class ListingPost(
     val sqFT: Int? = 0,
 
     @SerializedName("price")
-    val price: Int
+    val price: Int,
+
+    val name: String = "HI!!!"
 )

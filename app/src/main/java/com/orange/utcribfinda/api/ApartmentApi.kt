@@ -25,7 +25,6 @@ interface ApartmentApi {
         val output: List<ListingPost>
     )
 
-
     class SpannableDeserializer : JsonDeserializer<SpannableString> {
         // @Throws(JsonParseException::class)
         override fun deserialize(
