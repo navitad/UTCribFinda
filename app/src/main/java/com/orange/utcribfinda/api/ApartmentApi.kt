@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
-import com.orange.utcribfinda.api.ListingPost
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,7 +24,7 @@ interface ApartmentApi {
     class ListingData(
         val output: List<Responses>
     )
-    data class Responses(val data: ListingPost)
+    data class Responses(val listing: ListingPost)
 
     class SpannableDeserializer : JsonDeserializer<SpannableString> {
         // @Throws(JsonParseException::class)

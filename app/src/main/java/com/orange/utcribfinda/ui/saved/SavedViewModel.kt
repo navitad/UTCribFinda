@@ -17,10 +17,9 @@ class SavedViewModel : ViewModel() {
 
     //private var subredditList = mutableListOf<ListingPost>()
     //private var netPosts = MutableLiveData<List<ListingPost>>()
-    private var netPosts = mutableListOf<ListingPost>()
+    private var netPosts = MutableLiveData<List<ListingPost>>()
     private var favoritesList = mutableListOf<ListingPost>()
 
-    private var netPostsString = MutableLiveData<String>()
 
 
 
@@ -28,53 +27,20 @@ class SavedViewModel : ViewModel() {
         // XXX one-liner to kick off the app
         //setTitleToSubreddit()
         //repoFetch()
-        postsFetch()
+        fetchPosts()
         //subredditsFetch()
     }
 
-
-    fun postsFetch() {
-        fetchDone.postValue(false)
-        viewModelScope.launch(context = viewModelScope.coroutineContext + Dispatchers.IO) {
-            //var posts = ListingPostRepository(api).getPosts()
-            netPosts = ListingPostRepository(api).getPosts() as MutableList<ListingPost>
-//            if(posts == null) {
-//                netPostsString.postValue("didn't work lols")
-//            } else {
-                //netPosts.postValue(ListingPostRepository(api).getPosts())
-                //netPostsString.postValue(ListingPostRepository(api).getPosts()
-            //}
-
-            //netPosts.postValue(ListingPostRepository(api).getPosts())
+    fun fetchPosts() {
+        viewModelScope.launch(viewModelScope.coroutineContext + Dispatchers.IO) {
+            netPosts.postValue(ListingPostRepository(api).getPosts())
         }
     }
 
 
-    fun observeNetPosts() : MutableList<ListingPost> {
+    fun observeNetPosts() : MutableLiveData<List<ListingPost>> {
         return netPosts
     }
-
-    // Looks pointless, but if LiveData is set up properly, it will fetch posts
-    // from the network
-//    fun repoFetch() {
-//        val fetch = subreddit.value
-//        subreddit.value = fetch
-//    }
-
-//    fun observeFloorPlan(): LiveData<String> {
-//        return floorPlan
-//    }
-//    fun setTitle(newTitle: String) {
-//        floorPlan.value = newTitle
-//    }
-    // The parsimonious among you will find that you can call this in exactly two places
-//    fun setTitleToSubreddit() {
-//        title.value = "r/${subreddit.value}"
-//    }
-
-//    fun setSubreddit(curSubreddit : String) {
-//        subreddit.value = curSubreddit
-//    }
 
     // XXX Write me, set, observe, deal with favorites
     fun observeFavoritesList() : MutableList<ListingPost> {

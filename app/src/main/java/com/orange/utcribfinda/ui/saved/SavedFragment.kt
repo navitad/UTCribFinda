@@ -17,7 +17,6 @@ import com.orange.utcribfinda.ui.PostRowAdapter
 
 class SavedFragment : Fragment() {
 
-    //private var _binding: FragmentSavedBinding? = null
     private var _binding: FragmentSavedBinding? = null
     private val binding get() = _binding!!
 
@@ -55,12 +54,11 @@ class SavedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = initAdapter(binding)
-        adapter.submitList(viewModel.observeNetPosts())
-//        viewModel.observeNetPosts().observe(viewLifecycleOwner) {
-//            viewModel.fetchDone.postValue(true)
-//            // do more here
-//            adapter.submitList(it)
-//        }
+        viewModel.observeNetPosts().observe(viewLifecycleOwner) {
+            viewModel.fetchDone.postValue(true)
+            // do more here
+            adapter.submitList(it)
+        }
 
     }
 

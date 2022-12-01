@@ -1,4 +1,4 @@
-package com.orange.utcribfinda.ui//package com.orange.utcribfinda.ui
+package com.orange.utcribfinda.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -45,10 +45,6 @@ class PostRowAdapter(private val viewModel: SavedViewModel)
                 }
             }
 
-//            rowPostBinding.root.setOnClickListener {
-//                SavedViewModel.doOnePost(rowPostBinding.root.context, getItem(adapterPosition))
-//            }
-
         }
     }
 
@@ -63,27 +59,15 @@ class PostRowAdapter(private val viewModel: SavedViewModel)
         val rowBinding = holder.rowPostBinding
 
         rowBinding.title.text = "Villas On Rio"
-        rowBinding.selfText.text = item.price.toString()
-//        rowBinding.title.text = item.title
-//        rowBinding.selfText.text = item.selfText
-//        rowBinding.comments.text = item.commentCount.toString()
-//        rowBinding.score.text = item.score.toString()
-//        var thumbnailUrl = item.thumbnailURL
-//        var imageUrl = item.imageURL
-//        if(thumbnailUrl != null && imageUrl != null) {
-//            Glide.glideFetch(imageUrl, thumbnailUrl, rowBinding.image)
-//        }
+        if(item.price != null)
+            rowBinding.selfText.text = item.price.toString()
+
         // if heart was clicked change image
         if(viewModel.observeFavoritesList().contains(item)) {
             rowBinding.rowFav.setImageResource(R.drawable.ic_favorite_black_24dp)
         } else {
             rowBinding.rowFav.setImageResource(R.drawable.ic_favorite_border_black_24dp)
         }
-
-//        override fun submitList(list: MutableList<ListingPost>?) {
-//            super.submitList(list)
-//        }
-
 
     }
 }
