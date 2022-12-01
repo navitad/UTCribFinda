@@ -1,6 +1,7 @@
 package com.orange.utcribfinda.ui.home
 
-import android.R
+
+import com.orange.utcribfinda.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +11,21 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.orange.utcribfinda.databinding.FragmentHomeBinding
 import com.orange.utcribfinda.ui.saved.ResultsFragment
 import com.orange.utcribfinda.ui.saved.SavedFragment
+import com.orange.utcribfinda.ui.saved.SavedViewModel
 
-class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentHomeBinding? = null
-    private var _viewModel: ViewModel? = null
+    private val viewModel: HomeViewModel by viewModels()
+    //private var _viewModel: ViewModel? = null
     private var location: String = "West Campus"
     private var numRooms: Int = 0
     private var numBath: Int = 1
@@ -31,7 +37,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val viewModel get() = _viewModel!!
+
+    //private val viewModel get() = _viewModel!!
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -44,7 +51,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        //_viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         setUpLocation()
         setUpRooms()
@@ -57,12 +64,18 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private fun submit(){
         binding.submit.setOnClickListener{
-            var manager = activity!!.supportFragmentManager
-            manager.commit {
-                add(ViewGroup.generateViewId(), ResultsFragment.newInstance(), "findThisFrag")
-                    .addToBackStack(null)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            }
+            Navigation.createNavigateOnClickListener(
+                R.id.action_navigation_home_to_navigation_results
+            )
+
+
+
+//            var manager = activity!!.supportFragmentManager
+//            manager.commit {
+//                add(ViewGroup.generateViewId(), ResultsFragment.newInstance(), "findThisFrag")
+//                    .addToBackStack(null)
+//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+//            }
         }
     }
 
@@ -71,11 +84,11 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val aa = activity?.let {
             ArrayAdapter(
                 it,
-                R.layout.simple_spinner_item,
+                android.R.layout.simple_spinner_item,
                 data
             )
         }
-        aa?.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        aa?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         with(binding.locations)
         {
@@ -100,11 +113,11 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val aa = activity?.let {
             ArrayAdapter(
                 it,
-                R.layout.simple_spinner_item,
+                android.R.layout.simple_spinner_item,
                 data
             )
         }
-        aa?.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        aa?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         with(binding.rooms)
         {
@@ -129,11 +142,11 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val aa = activity?.let {
             ArrayAdapter(
                 it,
-                R.layout.simple_spinner_item,
+                android.R.layout.simple_spinner_item,
                 data
             )
         }
-        aa?.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        aa?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         with(binding.bathrooms)
         {

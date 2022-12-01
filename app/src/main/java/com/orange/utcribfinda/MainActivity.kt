@@ -64,6 +64,12 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setIcon(R.mipmap.ic_launcher_round)
 
 
+
+//        activityMainBinding.navView.setOnClickListener {
+//            it.onNavDestinationSelected(navController)
+//        }
+
+
 //        method below changes name based on fragment
 //        // Passing each menu ID as a set of Ids because each
 //        // menu should be considered as top level destinations.
