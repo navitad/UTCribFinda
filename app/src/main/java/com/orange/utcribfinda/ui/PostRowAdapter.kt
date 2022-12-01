@@ -17,11 +17,12 @@ class PostRowAdapter(private val viewModel: SavedViewModel)
 
     class ListingDiff : DiffUtil.ItemCallback<ListingPost>() {
         override fun areItemsTheSame(oldItem: ListingPost, newItem: ListingPost): Boolean {
-            return false
-//            return oldItem.key == newItem.key
+            //return false
+            return oldItem.floorPlanName == newItem.floorPlanName
         }
         override fun areContentsTheSame(oldItem: ListingPost, newItem: ListingPost): Boolean {
-            return false
+            return oldItem.floorPlanName == newItem.floorPlanName
+            //return false
 //            return ListingPost.spannableStringsEqual(oldItem.title, newItem.title) &&
 //                    ListingPost.spannableStringsEqual(oldItem.selfText, newItem.selfText) &&
 //                    ListingPost.spannableStringsEqual(oldItem.publicDescription, newItem.publicDescription) &&

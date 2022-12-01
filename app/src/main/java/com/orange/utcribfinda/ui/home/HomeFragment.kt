@@ -10,10 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.commit
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asFlow
@@ -29,7 +26,7 @@ import com.orange.utcribfinda.ui.saved.SavedViewModel
 class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentHomeBinding? = null
-    private val viewModel: SavedViewModel by viewModels()
+    private val viewModel: SavedViewModel by activityViewModels()
     private var _viewModel: ViewModel? = null
     private var location: String = "West Campus"
     private var numRooms: Int = 0

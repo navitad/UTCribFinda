@@ -21,7 +21,7 @@ class ResultsFragment : Fragment() {
     private var _binding: FragmentSavedBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SavedViewModel by viewModels()
+    private val viewModel: SavedViewModel by activityViewModels()
 
     companion object {
         fun newInstance(): ResultsFragment {
