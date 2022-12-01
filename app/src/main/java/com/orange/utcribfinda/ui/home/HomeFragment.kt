@@ -41,7 +41,14 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         setUpBath()
         setUpPrice()
         setUpSize()
+        submit()
         return binding.root
+    }
+
+    private fun submit(){
+        binding.submit.setOnClickListener{
+
+        }
     }
 
     private fun setUpLocation(){
