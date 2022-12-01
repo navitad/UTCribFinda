@@ -11,7 +11,7 @@ class ListingPostRepository(private val apartmentApi: ApartmentApi) {
         Log.d("rESD", children.toString())
         for (element in children) {
             //Log.d("eVAl", element.data.sqFT.toString())
-            result.add(element.listing)
+            result.add(element)
         }
         //Log.d("r", result.toString())
         return result
@@ -21,7 +21,7 @@ class ListingPostRepository(private val apartmentApi: ApartmentApi) {
     suspend fun getPosts(): List<ListingPost> {
         // XXX Write me.
         val response = apartmentApi.getVillasOnRioPosts()
-//        Log.d("Responses", response.data)
+        Log.d("Responses", response.data.toString())
         return unpackPosts(response)
     }
 }

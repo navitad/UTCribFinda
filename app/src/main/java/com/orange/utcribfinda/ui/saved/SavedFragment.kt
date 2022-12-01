@@ -1,6 +1,7 @@
 package com.orange.utcribfinda.ui.saved
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,10 +45,7 @@ class SavedFragment : Fragment() {
 //        val savedViewModel =
 //            ViewModelProvider(this)[SavedViewModel::class.java]
         _binding = FragmentSavedBinding.inflate(inflater, container, false)
-        //_binding = FragmentSavedBinding.inflate(inflater, container, false)
-        //val root: View = binding.root
         return binding.root
-        //return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,10 +53,10 @@ class SavedFragment : Fragment() {
 
         val adapter = initAdapter(binding)
         viewModel.observeNetPosts().observe(viewLifecycleOwner) {
-            viewModel.fetchDone.postValue(true)
-            // do more here
-            adapter.submitList(it)
+                Log.d("sf" , it.toString())
+                adapter.submitList(it)
         }
+
 
     }
 

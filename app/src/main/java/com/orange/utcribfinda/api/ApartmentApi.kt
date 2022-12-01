@@ -22,9 +22,9 @@ interface ApartmentApi {
     class ListingResponse(val data: ListingData)
 
     class ListingData(
-        val output: List<Responses>
+        val output: List<ListingPost>
     )
-    data class Responses(val listing: ListingPost)
+
 
     class SpannableDeserializer : JsonDeserializer<SpannableString> {
         // @Throws(JsonParseException::class)

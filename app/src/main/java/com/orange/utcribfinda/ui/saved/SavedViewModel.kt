@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 class SavedViewModel : ViewModel() {
 
     var api = ApartmentApi.create()
-    var fetchDone : MutableLiveData<Boolean> = MutableLiveData(false)
 
     //private var subredditList = mutableListOf<ListingPost>()
     //private var netPosts = MutableLiveData<List<ListingPost>>()
@@ -25,16 +24,14 @@ class SavedViewModel : ViewModel() {
 
     init {
         // XXX one-liner to kick off the app
-        //setTitleToSubreddit()
-        //repoFetch()
         fetchPosts()
-        //subredditsFetch()
     }
 
-    fun fetchPosts() {
+    fun fetchPosts() : Boolean {
         viewModelScope.launch(viewModelScope.coroutineContext + Dispatchers.IO) {
             netPosts.postValue(ListingPostRepository(api).getPosts())
         }
+        return true
     }
 
 

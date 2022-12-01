@@ -57,10 +57,9 @@ class PostRowAdapter(private val viewModel: SavedViewModel)
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = getItem(position)
         val rowBinding = holder.rowPostBinding
-
         rowBinding.title.text = "Villas On Rio"
-        if(item.price != null)
-            rowBinding.selfText.text = item.price.toString()
+//        if(item.price != null)
+//            rowBinding.selfText.text = item.price.toString()
 
         // if heart was clicked change image
         if(viewModel.observeFavoritesList().contains(item)) {

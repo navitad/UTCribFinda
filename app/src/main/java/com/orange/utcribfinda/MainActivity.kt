@@ -17,20 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-//    fun launchSaved() {
-//        supportActionBar?.
-//    }
-
-    private fun addSavedFragment() {
-        // No back stack for home
-        supportFragmentManager.commit {
-            add(R.id.main_frame, SavedFragment.newInstance(), "savedFragTag")
-            addToBackStack(null)
-            // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,15 +41,6 @@ class MainActivity : AppCompatActivity() {
 
 
         navView.setupWithNavController(navController)
-
-        
-
-//        binding.navView.setOnClickListener {
-//            supportFragmentManager.commit {
-//                addSavedFragment()
-//            }
-//        }
-
 
     }
 
