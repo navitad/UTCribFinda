@@ -15,7 +15,7 @@ class SavedViewModel : ViewModel() {
     var api = ApartmentApi.create()
 
     private var netPosts = MutableLiveData<List<ListingPost>>()
-    private var favoritesList = mutableListOf<ListingPost>()
+    private var savedList = mutableListOf<ListingPost>()
     var selectedPosts = mutableListOf<ListingPost>()
     private var postsPicked = MutableLiveData<List<ListingPost>>()
 
@@ -56,15 +56,15 @@ class SavedViewModel : ViewModel() {
         selectedPosts.addAll(list)
     }
     // XXX Write me, set, observe, deal with favorites
-    fun observeFavoritesList() : MutableList<ListingPost> {
-        return favoritesList
+    fun observeSavedList() : MutableList<ListingPost> {
+        return savedList
     }
 
-    fun setFavoritesList(item : ListingPost) {
-        favoritesList.add(item)
+    fun setSavedList(item : ListingPost) {
+        savedList.add(item)
     }
 
-    fun removeFavorite(item : ListingPost) {
-        favoritesList.remove(item)
+    fun removeSaved(item : ListingPost) {
+        savedList.remove(item)
     }
 }

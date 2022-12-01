@@ -37,11 +37,11 @@ class PostRowAdapter(private val viewModel: SavedViewModel)
         init {
             rowPostBinding.rowFav.setOnClickListener {
                 val item = getItem(adapterPosition)
-                if(viewModel.observeFavoritesList().contains(item)) {
-                    viewModel.removeFavorite(item)
+                if(viewModel.observeSavedList().contains(item)) {
+                    viewModel.removeSaved(item)
                     rowPostBinding.rowFav.setImageResource(R.drawable.ic_favorite_border_black_24dp)
                 } else {
-                    viewModel.setFavoritesList(item)
+                    viewModel.setSavedList(item)
                     rowPostBinding.rowFav.setImageResource(R.drawable.ic_favorite_black_24dp)
                 }
             }
@@ -66,7 +66,7 @@ class PostRowAdapter(private val viewModel: SavedViewModel)
         rowBinding.price.text = "$" + item.price.toString() + " /mo."
 
         // if heart was clicked change image
-        if(viewModel.observeFavoritesList().contains(item)) {
+        if(viewModel.observeSavedList().contains(item)) {
             rowBinding.rowFav.setImageResource(R.drawable.ic_favorite_black_24dp)
         } else {
             rowBinding.rowFav.setImageResource(R.drawable.ic_favorite_border_black_24dp)

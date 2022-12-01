@@ -58,11 +58,14 @@ class SavedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = initAdapter(binding)
-        Log.d("sfe" , adapter.toString())
-        viewModel.observeNetPosts().observe(viewLifecycleOwner) {
-                Log.d("sf" , it.toString())
-                adapter.submitList(it)
-        }
+        //Log.d("sfe" , adapter.toString())
+
+        adapter.submitList(viewModel.observeSavedList())
+
+//        viewModel.observeNetPosts().observe(viewLifecycleOwner) {
+//                Log.d("sf" , it.toString())
+//                adapter.submitList(it)
+//        }
         Log.d("sf" , adapter.toString())
         //findNavController().popBackStack()
 
