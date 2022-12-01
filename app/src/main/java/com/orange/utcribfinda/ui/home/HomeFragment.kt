@@ -8,9 +8,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.orange.utcribfinda.databinding.FragmentHomeBinding
+import com.orange.utcribfinda.ui.saved.ResultsFragment
+import com.orange.utcribfinda.ui.saved.SavedFragment
 
 class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -28,6 +32,12 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     // onDestroyView.
     private val binding get() = _binding!!
     private val viewModel get() = _viewModel!!
+
+    companion object {
+        fun newInstance(): HomeFragment {
+            return HomeFragment()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +57,12 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private fun submit(){
         binding.submit.setOnClickListener{
-
+            var manager = activity!!.supportFragmentManager
+            manager.commit {
+                add(ViewGroup.generateViewId(), ResultsFragment.newInstance(), "findThisFrag")
+                    .addToBackStack(null)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            }
         }
     }
 

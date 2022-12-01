@@ -30,4 +30,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
+<!--    <include-->
+<!--        android:id="@+id/contentMain"-->
+<!--        layout="@layout/content_main" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

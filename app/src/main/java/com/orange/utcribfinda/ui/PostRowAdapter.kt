@@ -48,7 +48,6 @@ class PostRowAdapter(private val viewModel: SavedViewModel)
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val binding = ListingPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return VH(binding)
@@ -57,9 +56,13 @@ class PostRowAdapter(private val viewModel: SavedViewModel)
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = getItem(position)
         val rowBinding = holder.rowPostBinding
-        //rowBinding.title.text = "Villas On Rio"
-//        if(item.price != null)
-//            rowBinding.selfText.text = item.price.toString()
+
+        rowBinding.apartmentComplex.text = "Villas On Rio"
+        rowBinding.floorPlan.text = item.floorPlanName
+        rowBinding.beds.text = item.numBeds.toString()
+        rowBinding.baths.text = item.numBaths.toString()
+        rowBinding.sqFt.text = item.sqFT.toString() + " sq ft."
+        rowBinding.price.text = "$" + item.price.toString() + " /mo."
 
         // if heart was clicked change image
         if(viewModel.observeFavoritesList().contains(item)) {

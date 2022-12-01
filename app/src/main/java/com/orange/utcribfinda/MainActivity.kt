@@ -11,24 +11,59 @@ import androidx.navigation.findNavController
 //import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.orange.utcribfinda.databinding.ActivityMainBinding
+import com.orange.utcribfinda.ui.home.HomeFragment
+import com.orange.utcribfinda.ui.saved.ResultsFragment
 import com.orange.utcribfinda.ui.saved.SavedFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    //private lateinit var binding: ActivityMainBinding
+
+    private fun addHomeFragment() {
+        // No back stack for home
+        supportFragmentManager.commit {
+            add(R.id.main_frame, HomeFragment.newInstance())
+            addToBackStack(null)
+            // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        }
+    }
+
+    private fun addResultsFragment() {
+        // No back stack for home
+        supportFragmentManager.commit {
+            add(R.id.main_frame, ResultsFragment.newInstance())
+            addToBackStack(null)
+            // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        }
+    }
+
+    private fun addSavedFragment() {
+        // No back stack for home
+        supportFragmentManager.commit {
+            add(R.id.main_frame, SavedFragment.newInstance())
+            addToBackStack(null)
+            // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(activityMainBinding.root)
+        //setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
+        val navView: BottomNavigationView = activityMainBinding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // set icon for the bar
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setIcon(R.mipmap.ic_launcher_round)
+
+
 //        method below changes name based on fragment
 //        // Passing each menu ID as a set of Ids because each
 //        // menu should be considered as top level destinations.
@@ -41,6 +76,10 @@ class MainActivity : AppCompatActivity() {
 
 
         navView.setupWithNavController(navController)
+
+       // addHomeFragment()
+
+
 
     }
 
