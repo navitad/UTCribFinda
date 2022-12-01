@@ -3,24 +3,25 @@ package com.orange.utcribfinda.api
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class ListingPost (
+data class ListingPost(
+
     @SerializedName("floorPlanName")
     @Expose
     var floorPlanName: String? = null,
 
-    @SerializedName("bedBath")
+    @SerializedName("numBeds")
     @Expose
-    var bedBath: String? = null,
+    var numBeds: Int? = null,
+
+    @SerializedName("numBaths")
+    @Expose
+    var numBaths: Int? = null,
+
+    @SerializedName("sqFT")
+    @Expose
+    var sqFT: Int? = null,
 
     @SerializedName("price")
     @Expose
-    var price: String? = null,
-
-    @SerializedName("sqFt")
-    @Expose
-    var sqFt: String? = null,
-
-    @SerializedName("availability")
-    @Expose
-    var availability: String? = null
+    var price: Int? = null
 )

@@ -17,7 +17,7 @@ import java.lang.reflect.Type
 
 interface ApartmentApi {
     //https://wrapapi.com
-    @GET("/use/navita/apartments/villasOnRioListings/0.0.1?wrapAPIKey=MVBCXaViCKCM9UnqmwuUo3d0R9fTftzN")
+    @GET("/use/navita/apartments/villasOnRioListingsForReal/0.0.1?wrapAPIKey=MVBCXaViCKCM9UnqmwuUo3d0R9fTftzN")
     suspend fun getVillasOnRioPosts() : ListingResponse
 
     class ListingResponse(val data: ListingData)

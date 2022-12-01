@@ -63,7 +63,7 @@ class PostRowAdapter(private val viewModel: SavedViewModel)
         val rowBinding = holder.rowPostBinding
 
         rowBinding.title.text = "Villas On Rio"
-        rowBinding.selfText.text = item.price
+        rowBinding.selfText.text = item.price.toString()
 //        rowBinding.title.text = item.title
 //        rowBinding.selfText.text = item.selfText
 //        rowBinding.comments.text = item.commentCount.toString()
